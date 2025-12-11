@@ -1,0 +1,17 @@
+IndentWidth: 4
+TabWidth: 4
+UseTab: Never
+BreakBeforeBraces: Attach 
+AllowShortFunctionsOnASingleLine: Empty
+ColumnLimit: 88
+BreakBeforeConceptDeclarations: Always
+AllowShortLambdasOnASingleLine: None
+PointerAlignment: Left
+AllowShortLoopsOnASingleLine: false
+AllowShortIfStatementsOnASingleLine: false
+AlignConsecutiveShortCaseStatements:
+  Enabled: true
+  AcrossEmptyLines: true
+  AcrossComments: true
+  AlignCaseColons: false
+IndentCaseLabels: true
