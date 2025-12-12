@@ -4,8 +4,24 @@
 #include "vec2.h"
 using namespace std;
 
-const vector<point> planets = {{0, 2 / 2.}, {-1 / 2., -1 / 2.}, {1 / 2., -2 / 2.}, {3, 3}};
-const vector<color> planet_colors = {red, green, yellow, blue};
+vector<point> planets;
+vector<color> planet_colors;
+const vector<color> base_colors = {red, green, yellow, blue};
+
+int init_planets() {
+    mt19937 rng(0);
+    uniform_real_distribution<double> dist_x(-8.0, 8.0);
+    uniform_real_distribution<double> dist_y(-4.5, 4.5);
+    const int N = 8;
+    for (int i = 0; i < N; i++) {
+        double x = dist_x(rng);
+        double y = dist_y(rng);
+        planets.push_back({x, y});
+        planet_colors.push_back(base_colors[i % base_colors.size()]);
+    }
+    return 0;
+}
+int _ = init_planets();
 
 double masses = 0.5;
 const vector<double> k(planets.size(), masses); // mass
