@@ -74,22 +74,26 @@ int main() {
     const double viewport_height = 9; // viewport centered at (0,0)
     const double viewport_width = 16;
 
-    const int im_height = 9 * 40;
-    const int im_width = 16 * 40;
+    const int im_height = 9 * 10;
+    const int im_width = 16 * 10;
     const double dy = viewport_height / im_height;
     const double dx = viewport_width / im_width;
 
-    array<array<color, im_width>, im_height> image1{};
+    // array<array<color, im_width>, im_height> image1{};
+
+    ofstream fout("output/image.ppm");
+    write_header(fout, im_height, im_width);
 
     for (int i = 0; i < im_height; i++) {
         clog << '\r' << i + 1 << '/' << im_height;
         for (int j = 0; j < im_width; j++) {
             double y = viewport_height / 2 - i * dy;
             double x = -viewport_width / 2 + j * dx;
-            image1[i][j] = point_color(x, y);
+            color col = point_color(x, y);
+            write_color(fout, col);
         }
     }
     clog << "\ndone first part.\n";
 
-    write_image(image1, "output/image.ppm");
+    // write_image(image1, "output/image.ppm");
 }
