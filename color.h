@@ -7,6 +7,7 @@ const color black = {0, 0, 0};
 const color white = {1, 1, 1};
 const color red = {1, 0, 0};
 const color green = {0, 1, 0};
+const color yellow = {1, 1, 0};
 const color blue = {0, 0, 1};
 
 inline color operator*(const color& c, double k) {
