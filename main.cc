@@ -4,16 +4,23 @@
 #include "vec2.h"
 using namespace std;
 
+const double ki = 0.5;  // mass
+const double c = 0.01;  // drag
+const double dt = 0.01; // simulation timestep
+const vector<color> base_colors = {red,  green,   yellow, blue,
+                                   cyan, magenta, orange, purple};
+
 vector<point> planets;
 vector<color> planet_colors;
-const vector<color> base_colors = {red, green, yellow, blue, cyan, magenta, orange, purple};
 
 int init_planets() {
-    mt19937 rng(0);
+    int64_t seed = time(nullptr);
+    clog << "using seed " << seed << '\n';
+    mt19937 rng(seed);
     uniform_real_distribution<double> dist_x(-8.0, 8.0);
     uniform_real_distribution<double> dist_y(-4.5, 4.5);
-    const int N = 8;
-    for (int i = 0; i < N; i++) {
+    const int n = base_colors.size();
+    for (int i = 0; i < n; i++) {
         double x = dist_x(rng);
         double y = dist_y(rng);
         planets.push_back({x, y});
@@ -22,13 +29,7 @@ int init_planets() {
     return 0;
 }
 int _ = init_planets();
-
-double masses = 0.5;
-const vector<double> k(planets.size(), masses); // mass
-
-const double c = 0.01; // drag
-
-const double dt = 0.01; // simulation timestep
+const vector<double> k(planets.size(), ki);
 
 void step_(vec2& x, vec2& v, vec2& a) {
     // non-synchronous updates are purportedly better
