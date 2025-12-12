@@ -10,7 +10,7 @@ const vector<color> planet_colors = {red, green, blue};
 double masses = 0.5;
 const vector<double> k = {masses, masses, masses}; // mass
 
-const double c = 0.5; // drag
+const double c = 0.05; // drag
 
 const double dt = 0.05; // simulation timestep
 
@@ -30,7 +30,7 @@ void step_(vec2& x, vec2& v, vec2& a) {
 }
 
 color simulate(vec2 x) {
-    static const int max_iter = 5000;
+    static const int max_iter = 10000;
 
     vec2 v = {0, 0};
     vec2 a = {0, 0};
