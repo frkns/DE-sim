@@ -6,7 +6,7 @@ using namespace std;
 
 vector<point> planets;
 vector<color> planet_colors;
-const vector<color> base_colors = {red, green, yellow, blue};
+const vector<color> base_colors = {red, green, yellow, blue, cyan, magenta, orange, purple};
 
 int init_planets() {
     mt19937 rng(0);
