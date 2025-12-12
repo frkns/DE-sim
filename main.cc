@@ -43,6 +43,8 @@ void step_(vec2& x, vec2& v, vec2& a) {
     a -= c * v;
 }
 
+int max_iters = 0;
+
 color simulate(vec2 x) {
     static const int max_iter = 50'000;
 
@@ -59,18 +61,19 @@ color simulate(vec2 x) {
         //     continue;
 
         for (int i = 0; i < planets.size(); i++)
-            if ((x - planets[i]).norm() < 0.15)
-                return max(1 - double(it) / (max_iter / 2.), 0.3) * planet_colors[i];
-        // return planet_colors[i];
+            if ((x - planets[i]).norm() < 0.15) {
+                max_iters = max(max_iters, it);
+                return max(1 - double(it) / (10'000.), 0.4) * planet_colors[i];
+            }
     }
     // clog << "DONE!\n";
-
     assert(!isnan(x.x));
     assert(!isnan(v.x));
     assert(!isnan(a.x));
     assert(!isnan(x.y));
     assert(!isnan(v.y));
     assert(!isnan(a.y));
+    max_iters = max_iter;
     return white;
 }
 
@@ -111,6 +114,7 @@ int main() {
         }
     }
     clog << "\ndone first part.\n";
+    clog << "max iterations seen " << max_iters << '\n';
 
     // write_image(image1, "output/image.ppm");
 }
