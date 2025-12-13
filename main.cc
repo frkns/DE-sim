@@ -9,6 +9,7 @@ const double c = 0.01;  // drag
 const double dt = 0.01; // simulation timestep
 const vector<color> base_colors = {red,  green,   yellow, blue,
                                    cyan, magenta, orange, purple};
+// const vector<color> base_colors = {red, cyan, blue};
 
 vector<point> planets;
 vector<color> planet_colors;
@@ -63,7 +64,7 @@ color simulate(vec2 x) {
         for (int i = 0; i < planets.size(); i++)
             if ((x - planets[i]).norm() < 0.15) {
                 max_iters = max(max_iters, it);
-                return max(1 - double(it) / (10'000.), 0.4) * planet_colors[i];
+                return max(1 - (it) / (15'000.), 0.0) * planet_colors[i];
             }
     }
     // clog << "DONE!\n";
@@ -99,8 +100,6 @@ int main() {
     const double dy = viewport_height / im_height;
     const double dx = viewport_width / im_width;
 
-    // array<array<color, im_width>, im_height> image1{};
-
     ofstream fout("output/image.ppm");
     write_header(fout, im_height, im_width);
 
@@ -115,6 +114,4 @@ int main() {
     }
     clog << "\ndone first part.\n";
     clog << "max iterations seen " << max_iters << '\n';
-
-    // write_image(image1, "output/image.ppm");
 }
